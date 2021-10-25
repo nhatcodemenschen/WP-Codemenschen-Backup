@@ -231,15 +231,22 @@ class CODEMEMSCHEN_HELPERS{
 
     }
 
-    public function getDirectorysize($path){
-        $bytestotal = 0;
-        $path = realpath($path);
-        if($path!==false && $path!='' && file_exists($path)){
-            foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object){
-                $bytestotal += $object->getSize();
+    public function getDirectorysize($directory){
+        $totalSize = 0;
+        $directoryArray = scandir($directory);
+        
+        foreach($directoryArray as $key => $fileName){
+            if($fileName != ".." && $fileName != "."){
+
+                if(is_dir($directory . "/" . $fileName)){
+                    $this->getDirectorysize($directory . "/" . $fileName);
+                } else {
+                    $totalSize = $totalSize + filesize($directory. "/". $fileName);
+                }
+                
             }
         }
-        return $bytestotal;
+        return $totalSize;
     }
 
     public function format_size($size) {

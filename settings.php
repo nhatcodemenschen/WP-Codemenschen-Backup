@@ -39,7 +39,7 @@ class CODEMEMSCHEN_SETTINGS{
 
     public function codemenschen_settings_page(){
         global $wp_codemenschen_helpers;
-        $wp_codemenschen_helpers->remove_all_folder();
+        //$wp_codemenschen_helpers->remove_all_folder();
         ?>
         <div class="codemenschen-wapper">
             <div class="container">
